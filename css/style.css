@@ -1,0 +1,119 @@
+/* Skip to main button should appear with keyboard use and disappear when not in focus */
+.skip a{
+  background: white;
+  left: 0;
+  padding: 6px;
+}
+
+.skip {
+  left: -10000px;
+  top: -40px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.skip:focus {
+  position: absolute;
+  width: auto;
+  height: auto;
+  top: 20px;
+  left: 0%;
+  padding: 1%;
+  background: #ffc;
+}
+
+/* Body should use given font and have an image background, with a , a backup color */
+body {
+  font-family: 'Poppins', serif;
+  background-image: url('concrete_seamless.png');
+  background-color: #f1f1f1;
+}
+
+/* 2. Demonstrate ability to use the flex display.  Yes, there are other ways to do layout but this assignment is focused on you showing proficiency in flexbox. */
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav_links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav_links a, .nav_links a:visited {
+  color: blue;
+}
+
+/* TODO: resolve: Check your work. The corners probably aren’t curving quite as you expected. Use Inspect Element to fix this problem. You will need to utilize a second selector. */
+
+/* TODO: figure out why the second card is not workign as it should be */
+
+/* style ONLY those header elements that are direct children of a card class */
+.card > header {
+  background: #288088;
+  border: solid 2px #45ADAD;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+  background-clip: padding-box;
+}
+
+/* center "card" items within the pricing div tag and position them in the center (horizontally) */
+.card {
+  flex: 0 0 450px;
+  margin: 10px;
+}
+
+.pricing {
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  align-items: center;
+}
+
+/* style the gallery to have borders and follow the instructor's mobile-view display */
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.gallery img {
+  /* width: 300px; */
+  width: 45%;
+  border: 10px solid #50C7C7;
+  margin: 10px;
+}
+
+
+/* 3. Demonstrate ability to create a media query to change the layout on the screen by adjusting flex. */
+
+
+/* 4. Demonstrate the ability to create a media query to create a printout that matches our example. */
+
+
+/* 5. Demonstrate ability to code a working animation and then disable it with a media query. */
+@keyframes logoAnimation {
+  0% {
+    width: 25px;
+    opacity: 0;
+  }
+  100% {
+    width: 475px;
+    opacity: 1;
+  }
+}
+
+#logo {
+  animation: logoAnimation 5s ease-in-out;
+}
+
+@media screen and (prefers-reduced-motion: reduce){
+  #logo {
+    animation: none; /* TODO: make sure this is correct */
+  }
+}
