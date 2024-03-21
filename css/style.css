@@ -33,6 +33,7 @@ body {
 /* 2. Demonstrate ability to use the flex display.  Yes, there are other ways to do layout but this assignment is focused on you showing proficiency in flexbox. */
 header {
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
   align-items: center;
 }
@@ -49,8 +50,6 @@ header {
 
 /* TODO: resolve: Check your work. The corners probably aren’t curving quite as you expected. Use Inspect Element to fix this problem. You will need to utilize a second selector. */
 
-/* TODO: figure out why the second card is not workign as it should be */
-
 /* style ONLY those header elements that are direct children of a card class */
 .card > header {
   background: #288088;
@@ -59,13 +58,17 @@ header {
   padding-bottom: 20px;
   border-top-left-radius: 50px;
   border-top-right-radius: 50px;
-  background-clip: padding-box;
 }
+
 
 /* center "card" items within the pricing div tag and position them in the center (horizontally) */
 .card {
   flex: 0 0 450px;
+  flex-direction: column;
+  flex: 1;
+  flex-wrap: wrap;
   margin: 10px;
+  width: 80%; /* TODO: find a "flex" solution to the width of the first and third box being too small */
 }
 
 .pricing {
@@ -73,6 +76,7 @@ header {
   flex-direction: column; 
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 /* style the gallery to have borders and follow the instructor's mobile-view display */
@@ -83,7 +87,6 @@ header {
 }
 
 .gallery img {
-  /* width: 300px; */
   width: 45%;
   border: 10px solid #50C7C7;
   margin: 10px;
@@ -91,18 +94,107 @@ header {
 
 
 /* 3. Demonstrate ability to create a media query to change the layout on the screen by adjusting flex. */
+@media screen and (min-width:900px) {
+  header {
+    justify-content: flex-start;
+    align-items: flex-end;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+  }
+
+  #logo {
+    margin-right: auto;
+  }
+
+  .nav_links {
+    justify-content: flex-start;
+    flex-direction: row;
+    /* TODO: align vertically with the logo! */
+  }
+
+  .pricing {
+    flex-direction: row;
+  }
+
+  .card {
+    z-index: 10;
+    flex: 0 0 275px;
+    margin: 10px;
+  }
+
+  .card > header {
+    position: static;
+    top: auto;
+    align-items: flex-start;
+  }
+
+  .gallery img {
+    width: 300px;
+  }
+}
 
 
 /* 4. Demonstrate the ability to create a media query to create a printout that matches our example. */
+@media print {
+  body {
+    font-family: Arial, Helvetica;
+    background-image: url('concrete_seamless.png');
+    background-color: #f1f1f1;
+  }
+  header {
+    justify-content: center;
+    align-items: center;
+  }
 
+  .nav {
+    display: flex;
+    justify-content: space-between; /* Space elements evenly */
+    padding: 0 20px; /* Add padding for spacing */
+  }
+
+  .nav_links {
+    justify-content: space-between;
+    flex-direction: row;
+  }
+
+  .pricing {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  .card {
+    /* TODO: sort out how to properly use the "325px" requirement AND delete the following line */
+    flex: 0 0 225px;
+    /* width: 325px; */
+    border: 2px solid #45ADDD;
+  }
+
+  .card ul li:nth-child(2)::after {
+    content: "👍";
+  }
+
+  #gallery {
+    display: none;
+  }
+
+  .gallery {
+    display: none;
+  }
+
+  /* TODO: sort out why the footer is not on the same page */
+
+}
 
 /* 5. Demonstrate ability to code a working animation and then disable it with a media query. */
 @keyframes logoAnimation {
-  0% {
+  from {
     width: 25px;
     opacity: 0;
   }
-  100% {
+  to {
     width: 475px;
     opacity: 1;
   }
