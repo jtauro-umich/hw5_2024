@@ -134,17 +134,18 @@ header {
     background-image: none;
   }
 
-  .nav {
+  nav {
     width: 100%;
   }
 
   .nav_links {
+    display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-around;
   }
 
   .pricing {
-    flex-wrap: nowrap;
+    flex-flow: row nowrap;
     align-items: flex-end;
   }
 
