@@ -23,17 +23,17 @@
   background: #ffc;
 }
 
-/* Body should use given font and have an image background, with a , a backup color */
+/* Body should use given font and have an image background, with a backup color */
 body {
   font-family: 'Poppins', serif;
-  background-image: url('concrete_seamless.png');
+  background-image: url('../images/concrete_seamless.png');
   background-color: #f1f1f1;
 }
 
-/* 2. Demonstrate ability to use the flex display.  Yes, there are other ways to do layout but this assignment is focused on you showing proficiency in flexbox. */
+/* 2. Demonstrate ability to use the flex display */
+/* center header and navigation links (as a column) */
 header {
   display: flex;
-  justify-content: space-between;
   flex-direction: column;
   align-items: center;
 }
@@ -41,14 +41,13 @@ header {
 .nav_links {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
 }
 
+/* Links should not change color once vistied */
 .nav_links a, .nav_links a:visited {
   color: blue;
 }
-
-/* TODO: resolve: Check your work. The corners probably aren’t curving quite as you expected. Use Inspect Element to fix this problem. You will need to utilize a second selector. */
 
 /* style ONLY those header elements that are direct children of a card class */
 .card > header {
@@ -62,18 +61,15 @@ header {
 
 
 /* center "card" items within the pricing div tag and position them in the center (horizontally) */
+/* In order to resolve the corners probably not curving as expected, modify the entire div, not just the header */
 .card {
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
   flex: 0 0 450px;
-  flex-direction: column;
-  flex: 1;
-  flex-wrap: wrap;
-  margin: 10px;
-  width: 80%; /* TODO: find a "flex" solution to the width of the first and third box being too small */
 }
 
 .pricing {
   display: flex;
-  flex-direction: column; 
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
@@ -87,7 +83,7 @@ header {
 }
 
 .gallery img {
-  width: 45%;
+  width: 300px;
   border: 10px solid #50C7C7;
   margin: 10px;
 }
@@ -96,32 +92,27 @@ header {
 /* 3. Demonstrate ability to create a media query to change the layout on the screen by adjusting flex. */
 @media screen and (min-width:900px) {
   header {
-    justify-content: flex-start;
-    align-items: flex-end;
+    /* space logo (to left) and nav links (to right) */
+    flex-direction: row;
+    justify-content: space-between;
+
+    /* fix header to top of page on scroll */
     position: sticky;
     top: 0;
-    width: 100%;
     z-index: 100;
   }
 
-  #logo {
-    margin-right: auto;
-  }
-
   .nav_links {
-    justify-content: flex-start;
     flex-direction: row;
-    /* TODO: align vertically with the logo! */
   }
 
   .pricing {
-    flex-direction: row;
+    flex-direction: nowrap;
   }
 
   .card {
     z-index: 10;
     flex: 0 0 275px;
-    margin: 10px;
   }
 
   .card > header {
@@ -140,55 +131,46 @@ header {
 @media print {
   body {
     font-family: Arial, Helvetica;
-    background-image: url('concrete_seamless.png');
-    background-color: #f1f1f1;
-  }
-  header {
-    justify-content: center;
-    align-items: center;
+    background-image: none;
   }
 
   .nav {
-    display: flex;
-    justify-content: space-between; /* Space elements evenly */
-    padding: 0 20px; /* Add padding for spacing */
+    width: 100%;
   }
 
   .nav_links {
-    justify-content: space-between;
     flex-direction: row;
+    justify-content: space-evenly;
   }
 
   .pricing {
-    flex-direction: row;
-    justify-content: center;
+    flex-wrap: nowrap;
     align-items: flex-end;
   }
 
   .card {
-    /* TODO: sort out how to properly use the "325px" requirement AND delete the following line */
-    flex: 0 0 225px;
-    /* width: 325px; */
     border: 2px solid #45ADDD;
+    flex: 1 1 325px;
   }
 
+  /* extra challenge: add thumbs up after each second li item in card */
   .card ul li:nth-child(2)::after {
     content: "👍";
   }
 
-  #gallery {
+  /* hide gallery */
+  #gallery, .gallery {
     display: none;
   }
 
-  .gallery {
-    display: none;
+  /* push footer to the next page to match screenshot */
+  .footer {
+    page-break-before: always;
   }
-
-  /* TODO: sort out why the footer is not on the same page */
-
 }
 
 /* 5. Demonstrate ability to code a working animation and then disable it with a media query. */
+/* animate logo using keyframes */
 @keyframes logoAnimation {
   from {
     width: 25px;
@@ -200,12 +182,14 @@ header {
   }
 }
 
+/* add animation to logo */
 #logo {
   animation: logoAnimation 5s ease-in-out;
 }
 
+/* account for usability preferences by removing logo animation if specified */
 @media screen and (prefers-reduced-motion: reduce){
   #logo {
-    animation: none; /* TODO: make sure this is correct */
+    animation-duration: 0s;
   }
 }
